@@ -36,6 +36,7 @@ function initMap () {
     
     // map.fitBounds(latLngBounds);
     poly.setMap(map);
+    poly.fitBounds(latLngBounds);
 
 
     marker = new google.maps.Marker({
