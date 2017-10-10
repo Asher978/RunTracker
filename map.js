@@ -20,8 +20,9 @@ function startRun () {
   console.log('start was clicked!');
   watchId = navigator.geolocation.watchPosition((pos) => {
     const { latitude: lat, longitude: lng } = pos.coords;
-    runData.push([[lat, lng]])
-    polyline = L.polyline(runData, 
+    runData.push(lat, lng)
+    console.log(runData)
+    polyline = L.polyline([runData], 
     {
       color: 'red',
       weight: 10,
