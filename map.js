@@ -7,7 +7,7 @@ startBtn.addEventListener('click', () => startRun())
 navigator.geolocation.getCurrentPosition((pos) => {
   const { latitude: lat, longitude: lng } = pos.coords;  
   map = L.map('map').setView([lat, lng], 14);
-  mapLink = '<a href="http://openstreetmap.org">OpenStreetMap</a>';
+  mapLink = '<a href="https://openstreetmap.org">OpenStreetMap</a>';
   L.tileLayer(
     'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; ' + mapLink + ' Contributors',
