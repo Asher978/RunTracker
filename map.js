@@ -29,9 +29,9 @@ function startRun () {
   marker = L.marker(map.getCenter()).addTo(map);
   watchId = navigator.geolocation.watchPosition((pos) => {
     const { latitude: lat, longitude: lng } = pos.coords;
-    marker.setLatLng([lat, lng]);
     runData.push([lat, lng])
     console.log(runData)
+    marker.setLatLng(runData[runData.length - 1]);
 
     polyline = L.polyline(runData, 
     {
