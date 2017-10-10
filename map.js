@@ -45,7 +45,7 @@ function startRun () {
 }
 
 function stopRun () {
-  navigator.geolocation.clearWatch(watchId);  
+  navigator.geolocation.clearWatch(watchId);
 }
         
         
