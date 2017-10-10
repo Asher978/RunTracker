@@ -3,8 +3,14 @@ var map;
 var mapId = 'mapbox.streets';
 var access_token = 'pk.eyJ1IjoiYXNoZXI5NzgiLCJhIjoiY2o1eTVmNXlnMGJ2NjJ5cWRxMTRtY2hsMSJ9.y7O2ehEprrX26JpPyZatrQ';
 var runData = [];
+var marker;
+
+// event listeners
 let startBtn = document.getElementById('start');
 startBtn.addEventListener('click', () => startRun())
+
+let stopBtn = document.getElementById('stop');
+stopBtn.addEventListener('click', () => stopRun());
 
 navigator.geolocation.getCurrentPosition((pos) => {
   const { latitude: lat, longitude: lng } = pos.coords;  
@@ -20,25 +26,12 @@ navigator.geolocation.getCurrentPosition((pos) => {
 function startRun () {
   var polyline;
   console.log('start was clicked!');
+  marker = L.marker(map.getCenter()).addTo(map);
   watchId = navigator.geolocation.watchPosition((pos) => {
     const { latitude: lat, longitude: lng } = pos.coords;
+    marker.setLatLng([lat, lng]);
     runData.push([lat, lng])
     console.log(runData)
-    // polyline = L.polyline([
-    //   [40.739804199999995, -73.9895718],
-    //   [40.739804199999995, -74.9895718],
-    //   [40.739804199999995, -75.9895718]
-      
-    //   ],
-    //   {
-    //       color: 'red',
-    //       weight: 10,
-    //       opacity: .7,
-    //       dashArray: '20,15',
-    //       lineJoin: 'round'
-    //   }
-    //   ).addTo(map);
-
 
     polyline = L.polyline(runData, 
     {
@@ -49,6 +42,10 @@ function startRun () {
       lineJoin: 'round'
     }).addTo(map);
   })
+}
+
+function stopRun () {
+  navigator.geolocation.clearWatch(watchId);  
 }
         
         
