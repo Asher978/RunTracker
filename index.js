@@ -34,7 +34,8 @@ function initMap () {
       map: map
     });
     
-    map.fitBounds(latLngBounds);
+    // map.fitBounds(latLngBounds);
+    poly.setMap(map);
 
 
     marker = new google.maps.Marker({
