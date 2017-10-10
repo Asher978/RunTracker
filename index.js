@@ -3,9 +3,10 @@ console.log('JS is loaded');
 var runData = [];
 var poly;
 var latLngBounds;
+var watchId;
 
 function initMap () {
-  navigator.geolocation.watchPosition((pos) => {
+  watchId = navigator.geolocation.watchPosition((pos) => {
     const { latitude: lat, longitude: lng } = pos.coords;
     runData.push(new google.maps.LatLng(lat, lng))
     console.log('new position--->', runData)
@@ -36,7 +37,6 @@ function initMap () {
     
     // map.fitBounds(latLngBounds);
     poly.setMap(map);
-    poly.fitBounds(latLngBounds);
 
 
     marker = new google.maps.Marker({
@@ -54,14 +54,18 @@ function addLatLng (event) {
   console.log(path)
 }
 
-
+// start the run
 let startBtn = document.getElementById('start');
 startBtn.addEventListener('click', () => { initMap() })
 
-var watchId;
-function startRun () {
-  console.log('Start Run Cicked!')
-  watchId = navigator.geolocation.watchPosition(success, error, options);
+//stop the run
+let stopBtn = document.getElementById('stop');
+stopBtn.addEventListener('click', () => { stopRun() })
+
+
+function stopRun () {
+  console.log('stop run fired')
+  navigator.geolocation.clearWatch(watchId);
 }
 
 const options = {
