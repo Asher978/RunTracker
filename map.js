@@ -22,32 +22,32 @@ function startRun () {
   console.log('start was clicked!');
   watchId = navigator.geolocation.watchPosition((pos) => {
     const { latitude: lat, longitude: lng } = pos.coords;
-    runData.push(lat, lng)
+    runData.push([lat, lng])
     console.log(runData)
-    polyline = L.polyline([
-      [40.739804199999995, -73.9895718],
-      [40.739804199999995, -74.9895718],
-      [40.739804199999995, -75.9895718]
+    // polyline = L.polyline([
+    //   [40.739804199999995, -73.9895718],
+    //   [40.739804199999995, -74.9895718],
+    //   [40.739804199999995, -75.9895718]
       
-      ],
-      {
-          color: 'red',
-          weight: 10,
-          opacity: .7,
-          dashArray: '20,15',
-          lineJoin: 'round'
-      }
-      ).addTo(map);
+    //   ],
+    //   {
+    //       color: 'red',
+    //       weight: 10,
+    //       opacity: .7,
+    //       dashArray: '20,15',
+    //       lineJoin: 'round'
+    //   }
+    //   ).addTo(map);
 
 
-    // polyline = L.polyline([runData], 
-    // {
-    //   color: 'red',
-    //   weight: 10,
-    //   opacity: .7,
-    //   dashArray: '20,15',
-    //   lineJoin: 'round'
-    // }).addTo(map);
+    polyline = L.polyline(runData, 
+    {
+      color: 'red',
+      weight: 10,
+      opacity: .7,
+      dashArray: '20,15',
+      lineJoin: 'round'
+    }).addTo(map);
   })
 }
         
