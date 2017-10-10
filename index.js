@@ -17,15 +17,15 @@ function initMap () {
       mapTypeId: google.maps.MapTypeId.ROADMAP
     });
 
-    latLngBounds = new google.maps.LatLngBounds();
-    for (let i = 0; i < runData.length; i++) {
-      latLngBounds.extend(runData[i]);
-      new google.maps.Marker({
-        map: map,
-        position: runData[i],
-        title: "Point " + (i + 1)
-      });
-    }
+    // latLngBounds = new google.maps.LatLngBounds();
+    // for (let i = 0; i < runData.length; i++) {
+    //   latLngBounds.extend(runData[i]);
+    //   new google.maps.Marker({
+    //     map: map,
+    //     position: runData[i],
+    //     title: "Point " + (i + 1)
+    //   });
+    // }
 
     poly = new google.maps.Polyline({
       strokeColor: '#000000',
@@ -64,7 +64,7 @@ stopBtn.addEventListener('click', () => { stopRun() })
 
 
 function stopRun () {
-  console.log('stop run fired')
+  console.log('stop run fired', watchId)
   navigator.geolocation.clearWatch(watchId);
 }
 
