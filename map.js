@@ -1,6 +1,6 @@
 console.log('map.js is loaded!');
 var map;
-var mapId = 'mapbox.run-bike-hike';
+var mapId = 'mapbox.streets';
 var access_token = 'pk.eyJ1IjoiYXNoZXI5NzgiLCJhIjoiY2o1eTVmNXlnMGJ2NjJ5cWRxMTRtY2hsMSJ9.y7O2ehEprrX26JpPyZatrQ';
 var runData = [];
 let startBtn = document.getElementById('start');
@@ -11,7 +11,7 @@ navigator.geolocation.getCurrentPosition((pos) => {
   map = L.map('map').setView([lat, lng], 14);
   mapLink = '<a href="https://openstreetmap.org">OpenStreetMap</a>';
   L.tileLayer(
-    'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    `https://api.tiles.mapbox.com/v4/${mapId}/{z}/{x}/{y}.png?access_token=${access_token}`, {
       attribution: '&copy; ' + mapLink + ' Contributors',
       maxZoom: 18,
     }).addTo(map);
