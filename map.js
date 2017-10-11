@@ -22,9 +22,18 @@ navigator.geolocation.getCurrentPosition((pos) => {
       maxZoom: 18,
     }).addTo(map);
 });
+
+// error for watchposition
+function error(err) {
+  console.warn('ERROR(' + err.code + '): ' + err.message);
+}
   
 function startRun () {
-  var polyline;
+  const options = {
+    enableHighAccuracy: true,
+    timeout: 4000,
+    maximumAge: 0
+  };
   console.log('start was clicked!');
   marker = L.marker(map.getCenter()).addTo(map);
   watchId = navigator.geolocation.watchPosition((pos) => {
@@ -32,20 +41,22 @@ function startRun () {
     runData.push([lat, lng])
     console.log(runData)
     marker.setLatLng(runData[runData.length - 1]);
-
-    polyline = L.polyline(runData, 
-    {
-      color: 'red',
-      weight: 10,
-      opacity: .7,
-      dashArray: '20,15',
-      lineJoin: 'round'
-    }).addTo(map);
-  })
+    
+  }, error, options)
 }
 
 function stopRun () {
+  console.log(runData)
+  var polyline;
   navigator.geolocation.clearWatch(watchId);
+  polyline = L.polyline(runData, 
+  {
+    color: 'red',
+    weight: 10,
+    opacity: .7,
+    dashArray: '20,15',
+    lineJoin: 'round'
+  }).addTo(map);
 }
         
         
